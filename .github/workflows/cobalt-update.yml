@@ -72,6 +72,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
  
+      - name: Set lowercase repository name
+        run: echo "IMAGE_NAME_LOWER=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v6
@@ -79,8 +82,8 @@ jobs:
           context: .
           push: true
           tags: >-
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.update.outputs.version }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:latest,
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:${{ needs.update.outputs.version }}
           build-args: |
             WEB_HOST=${{ vars.COBALT_WEB_HOST }}
             WEB_PLAUSIBLE_HOST=${{ vars.COBALT_WEB_PLAUSIBLE_HOST }}
