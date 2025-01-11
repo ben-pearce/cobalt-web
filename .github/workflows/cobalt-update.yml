@@ -54,7 +54,7 @@ jobs:
       id-token: write
 
     needs: update
-    if: ${{ needs.update.outputs.previous != needs.update.outputs.version }}
+    if: ${{ needs.update.outputs.previous != needs.update.outputs.version || github.event_name == 'workflow_dispatch' }}
 
     name: 'Publish Docker image'
     runs-on: ubuntu-latest
