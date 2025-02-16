@@ -6,6 +6,7 @@ FROM base AS build
 WORKDIR /app
 COPY cobalt /app
 
+RUN npm install --global corepack@latest
 RUN corepack enable
 RUN apt-get update && \
     apt-get install -y python3 build-essential curl
