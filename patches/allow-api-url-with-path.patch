@@ -1,0 +1,11 @@
+diff --git a/web/src/lib/api/api-url.ts b/web/src/lib/api/api-url.ts
+index bec76257..a9564b17 100644
+--- a/web/src/lib/api/api-url.ts
++++ b/web/src/lib/api/api-url.ts
+@@ -10,5 +10,5 @@ export const currentApiURL = () => {
+         return new URL(customInstanceURL).origin;
+     }
+ 
+-    return new URL(env.DEFAULT_API!).origin;
++    return new URL(env.DEFAULT_API!).href;
+ }
